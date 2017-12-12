@@ -1,0 +1,17 @@
+.speak-button{
+
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	height: 50px;
+	width: 50px;
+	z-index:999;
+	cursor: pointer;
+
+}
+
+.speak-button img{
+
+	height: 100%;
+	width: 100%;
+}
