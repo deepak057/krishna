@@ -134,6 +134,18 @@
 					
 					},
 					
+					
+					{
+					
+						heading: 'Supersoul is everywhere',
+						content: "We are all pieces and parcels of Supreme Personality of Godhead",
+						muted: 'LORD KRISHNA',
+						image: 'static/images/9ed179ec62ee53d81eb9a4199a2fbe4d.jpg',
+					
+					
+					},
+					
+					
 				],
 				
 				currentImage: '',

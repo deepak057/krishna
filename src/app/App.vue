@@ -3,6 +3,7 @@
 	
 		<navigation></navigation>
         <dashboard></dashboard>
+		<div id="overlay"></div>
 		
 	
   </div>
