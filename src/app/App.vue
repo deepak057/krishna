@@ -2,8 +2,20 @@
   <div id="app">
 	
 		<navigation></navigation>
+		
+		<div v-show="!overlay" @click="clicked" class="speak-button">
+			<img src="static/images/speak.png" />
+		</div>
         <dashboard></dashboard>
-		<div id="overlay"></div>
+		<div v-show="overlay" id="overlay"></div>
+		
+		<div v-show="overlay" class="overlay-content">
+		
+			<img class="pointer"  v-show="overlay" @click="overlay=!overlay" src="static/images/index.png" />
+		
+			<img src="static/images/ezimba19049846833700.gif" />
+		
+		</div>
 		
 	
   </div>
@@ -21,7 +33,26 @@ export default {
 	Navigation,
 	Sidebar,
 	Dashboard,
-  }
+  },
+  data(){
+  
+	return {
+	
+		overlay: false,
+	
+	}
+  
+  },
+  methods: {
+	clicked(){
+		
+		
+		this.overlay = true;
+		
+	
+	},
+  
+  },
 }
 </script>
 
