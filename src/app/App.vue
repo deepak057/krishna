@@ -13,7 +13,7 @@
 		
 			<img class="pointer"  v-show="overlay" @click="overlay=!overlay" src="static/images/index.png" />
 		
-			<img src="static/images/ezimba19049846833700.gif" />
+			<img src="static/images/mic.png" />
 		
 		</div>
 		
