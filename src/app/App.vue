@@ -9,7 +9,7 @@
         
 		<dashboard></dashboard>
 		
-		<bootstrap-modal id="myModal1" class="custom-popup" role="dialog" ref="theModal" :need-header="true" :need-footer="false">
+		<bootstrap-modal centered  class="custom-popup" role="dialog" ref="theModal" :need-header="true" :need-footer="false">
 			<div slot="title">
 			</div>
 			<div slot="body">
@@ -46,12 +46,6 @@ export default {
 	}
   
   },
-  
-  
-  mounted(){
-    
-  },
-  
   
   methods: {
 	clicked(){
