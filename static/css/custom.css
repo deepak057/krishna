@@ -37,7 +37,7 @@
     cursor: pointer; /* Add a pointer on hover */
 }
 
-.overlay-content{
+/*.overlay-content{
 	
 	position: absolute;
 	top: 30%;
@@ -45,5 +45,43 @@
 	width: 50%;
 	z-index: 99999;
 	background: blue;
+
+}*/
+
+.custom-popup {
+
+	z-index: 99999 !important;
+
+}
+
+.custom-popup .modal-content{
+
+	background: none !important;
+	color: #fff;
+	box-shadow: none !important;
+	border: none !important;
+
+}
+
+.custom-popup .modal-header{
+
+	border-bottom: none;
+
+}
+
+.custom-popup .close{
+
+	color: #fff;
+
+}
+
+.background-darken{
+
+	background: rgba(0, 0, 0, 0.9) !important;
+}
+
+.modal-backdrop.in {
+
+	opacity: .8 !important;
 
 }

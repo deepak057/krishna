@@ -3,20 +3,22 @@
 	
 		<navigation></navigation>
 		
-		<div v-show="!overlay" @click="clicked" class="speak-button">
-			<img src="static/images/speak.png" />
+		<div  class="speak-button">
+			<img @click="clicked()" src="static/images/speak.png" />
 		</div>
-        <dashboard></dashboard>
-		<div v-show="overlay" id="overlay"></div>
+        
+		<dashboard></dashboard>
 		
-		<div v-show="overlay" class="overlay-content">
-		
-			<img class="pointer"  v-show="overlay" @click="overlay=!overlay" src="static/images/index.png" />
-		
-			<img src="static/images/mic.png" />
-		
-		</div>
-		
+		<bootstrap-modal id="myModal1" class="custom-popup" role="dialog" ref="theModal" :need-header="true" :need-footer="false">
+			<div slot="title">
+			</div>
+			<div slot="body">
+				<div class="text-center">
+					 <img src="static/images/mic.png" />
+					<h1>Listening....</h1>
+				</div>
+			</div>
+		</bootstrap-modal> 
 	
   </div>
 </template>
@@ -33,6 +35,7 @@ export default {
 	Navigation,
 	Sidebar,
 	Dashboard,
+	'bootstrap-modal': require('vue2-bootstrap-modal')
   },
   data(){
   
@@ -43,16 +46,25 @@ export default {
 	}
   
   },
+  
+  
+  mounted(){
+    
+  },
+  
+  
   methods: {
 	clicked(){
 		
-		
-		this.overlay = true;
+		  this.$refs.theModal.open()
 		
 	
 	},
-  
+	
+	
   },
+  
+  
 }
 </script>
 
