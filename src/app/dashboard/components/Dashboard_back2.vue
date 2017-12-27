@@ -1,53 +1,73 @@
 <template>
-  <div id="app">
 	
-		<navigation></navigation>
+	<div class="container demo-1">
 		
-		<div  class="speak-button">
-			<img @click="clicked()" src="static/images/speak.png" />
-		</div>
-        
-		<dashboard></dashboard>
 		
-		<bootstrap-modal centered  class="custom-popup" role="dialog" ref="theModal" :need-header="true" :need-footer="false">
-			<div slot="title">
-			</div>
-			<div slot="body">
-				<div class="text-center">
-					 <img src="static/images/mic.png" />
-					<h1>{{message}}</h1>
-					<p v-show="chantsCount" class="chants-meta">You have chanted <a :title="!showChants? 'Show Chants': 'Hide Chants'"  @click="showChants= !showChants" hrfe="#" class="pointer hover-underline">{{chantsCount}}</a> times</p>
-					<p v-show="showChants" v-html="chants" class="chants-container text-success"></p>
+            <!--<nav class="codrops-demos">
+				<a class="current-demo" href="index.html">Demo 1</a>
+				<a href="index2.html">Demo 2</a>
+			</nav>-->
+
+            <div id="slider" class="sl-slider-wrapper">
+
+				<div class="sl-slider">
+				
+					<div v-for="(item, index) in content" class="sl-slide"  :data-orientation="index % 2== 0? 'horizontal': 'vertical'" :data-slice1-rotation="getRandomInteger()" :data-slice2-rotation="getRandomInteger()" :data-slice1-scale="getRandomInteger(2)" :data-slice2-scale="getRandomInteger(2)" >
+						<div class="sl-slide-inner">
+								<div class="deco">
+									<div class="circle">
+										<img :class="['img-'+(index+1), 'content-image br']" :src="item.image"  />
+										
+									</div>
+								
+										
+								</div>
+								<h2>{{item.heading}}</h2>
+								<blockquote><p>{{item.content}}</p><cite>{{item.muted}}</cite></blockquote>
+						</div>
 				</div>
-			</div>
-		</bootstrap-modal> 
+				
+					
+				</div><!-- /sl-slider -->
+				
+				<nav id="nav-arrows" class="nav-arrows">
+					<span class="nav-arrow-prev">Previous</span>
+					<span class="nav-arrow-next">Next</span>
+				</nav>
+
+				<nav id="nav-dots" class="nav-dots">
+					<span v-for="n in content.length" :class="{'nav-dot-current': (n==1)}"></span>
+					
+				</nav>
+
+			</div><!-- /slider-wrapper -->
+
+        </div>
 	
-  </div>
 </template>
+
 
 <script>
 
-import { Navigation } from './navigation/components';
-import { Sidebar } from './sidebar/components';
-import { Dashboard } from './dashboard/components';
-
-export default {
-  name: 'app',
-  components: {
-	Navigation,
-	Sidebar,
-	Dashboard,
-	'bootstrap-modal': require('vue2-bootstrap-modal')
-  },
-  data(){
-  
-	return {
+	export default {
 	
+		name: 'dashboard',
+		
+		mounted(){
+		
+			  
+		
+		},
+		
+		data(){
+		
+			return {
+			
+				
 				recognition: '',
-				message: 'Listening...',
+				message: 'Default message',
 				chantsCount: 2,
 				chants: "",
-				showChants: false,
 				mhaMantra: [
 				
 					"Hare Ram Hare Ram Ram Ram Hare Hare Hare Krishna Hare Krishna Krishna Krishna Hare Hare",
@@ -129,12 +149,12 @@ export default {
 				],
 				
 				currentImage: '',
-	
-	}
-  
-  },
-  
-  mounted(){
+			
+			}
+		
+		},
+		
+		mounted(){
 		
 			this.afterUpdate();
 		
@@ -169,7 +189,7 @@ export default {
 				
 				this.recognition.onspeechend = function() {
 				  par.setValue(par.messages[2]);
-				  //par.recognition.start();
+				  par.recognition.start();
 				}
 
 				this.recognition.onerror = function(event) {
@@ -179,18 +199,16 @@ export default {
 				}
 		},
 		
-  
-  methods: {
-	clicked(){
-		
-		  this.$refs.theModal.open();
-		  //this.recognition.start();
-		  this.setValue(this.mhaMantra[0]);
-		
+		methods: {
 	
-	},
-	
-	setValue(value_){
+			click(){
+				
+				//this.recognition.start();
+				this.setValue(this.mhaMantra[0]);
+				
+			},
+			
+			setValue(value_){
 			
 				if(this.mhaMantra.indexOf(value_)!=-1){
 				
@@ -244,15 +262,13 @@ export default {
 			
 				this.updateChants();
 				
-				//this.updateImage();
+				this.updateImage();
 			
 			}
 		
-	
-	
-  },
-  
-  watch: {
+		},
+		
+		watch: {
 		
 			chantsCount(newv, oldv){
 			
@@ -261,11 +277,7 @@ export default {
 			},
 		
 		}
-  
-  
-}
+	
+	}
+
 </script>
-
-<style>
-
-</style>
