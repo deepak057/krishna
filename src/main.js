@@ -5,6 +5,8 @@ import Vue from 'vue';
 import { App } from './app';
 import router from './router';
 
+//Include jQuery
+window.$ = window.jQuery = require('jquery');
 
 /* eslint-disable no-new */
 new Vue({
