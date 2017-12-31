@@ -35,7 +35,7 @@
 				</nav>
 
 				<nav id="nav-dots" class="nav-dots">
-					<span v-for="n in sliderContent" :class="{'nav-dot-current': (n==1)}"></span>
+					<span v-for="n in slideIndex" :key="n" @click="dotClicked(n)" :class="{'nav-dot-current': (n==1)}"></span>
 					
 				</nav>
 
@@ -59,7 +59,6 @@
 			var that = this;
 			
 			this.getNewSlideContent();
-			this.getNewSlideContent();
 			
 			window.onload = function(){
 			
@@ -81,7 +80,7 @@
 				
 				slitslider: {},
 				page: {},
-				slideIndex: 2,
+				slideIndex: 1,
 				
 				
 				content: [
@@ -163,21 +162,20 @@
 			
 			getNewSlideContent() {
 								  
-						if (this.copy.length < 1) { 
-							this.copyContent();
-						}
-						var index = Math.floor(Math.random() * this.copy.length);
-						var item = this.copy[index];
-						this.copy.splice(index, 1);	
-						
-						if(!this.flag){
-							this.sliderContent.push(item);
-							this.flag = true;
-						}
-						
-						return item;			  
+				if (this.copy.length < 1) { 
+					this.copyContent();
+				}
+				var index = Math.floor(Math.random() * this.copy.length);
+				var item = this.copy[index];
+				this.copy.splice(index, 1);	
+				
+				if(!this.flag){
+					this.sliderContent.push(item);
+					this.flag = true;
+				}
+				
+				return item;			  
 			},
-			
 			
 			
 			initSliderEvent(){
@@ -198,20 +196,24 @@
 			initSlider(){
 			
 				var that = this,
-				$navArrows = $( '#nav-arrows' ),
-				$nav = $( '#nav-dots > span' );
+				$navArrows = $( '#nav-arrows' );
+				
 					
 				this.slitslider = $( '#slider' ).slitslider( {
 							onBeforeChange : function( slide, pos ) { 
-
-								$nav.removeClass( 'nav-dot-current' );
-								$nav.eq( pos ).addClass( 'nav-dot-current' );
-
+							
+								
 							},
 							
 							onAfterChange: function(slide, pos){
 								
-								that.applySlideColor(pos+2)	
+								var $nav = that.getNav();
+
+								$nav.removeClass( 'nav-dot-current' );
+								$nav.eq( pos ).addClass( 'nav-dot-current' );
+
+								
+								that.applySlideColor(pos)	
 							
 							},
 							
@@ -227,42 +229,40 @@
 					return false;
 					
 			
-				} );
+				});
 				
 				$navArrows.children( ':first' ).on( 'click', function() {
 								
-								that.slitslider.previous();
-								return false;
+					that.slitslider.previous();
+					return false;
 
-				} );
-
-				
-				$nav.each( function( i ) {
-							
-					$( this ).on( 'click', function( event ) {
-						
-						var $dot = $( this );
-						
-						if( !that.slitslider.isActive() ) {
-
-							$nav.removeClass( 'nav-dot-current' );
-							$dot.addClass( 'nav-dot-current' );
-						
-						}
-						
-						that.slitslider.jump( i + 1 );
-						
-						return false;
-					
-					} );
-								
-				} );
+				});
 				
 				this.applySlideColor(1);
-				this.applySlideColor(2);
+				
+			},
+			
+			getNav(){
+			
+				return $( '#nav-dots > span' );
 			
 			},
 			
+			dotClicked($index){
+				
+				var $nav = this.getNav();
+				
+				if( !this.slitslider.isActive() ) {
+
+					$nav.removeClass( 'nav-dot-current' );
+					$nav.eq($index-1).addClass( 'nav-dot-current ');
+						
+				}
+						
+						
+				this.slitslider.jump( $index );
+							
+			},
 			
 			applySlideColor(pos){
 				
@@ -274,9 +274,67 @@
 					
 						img.attr("data-adaptive-background", "");
 						
+						
+					/*var blob = new Blob([
+					"onmessage = function(e) { var data = e.data; alert(data.e);  postMessage('msg from worker');}"]);
+
+					// Obtain a blob URL reference to our worker 'file'.
+					var blobURL = window.URL.createObjectURL(blob);
+
+					var worker = new Worker(blobURL);
+					worker.onmessage = function(e) {
+					  alert(e.data);
+					};
+					
+					var e=document.createElement('canvas');
+					worker.postMessage({e:e}); // Start the worker.
+									
+						return ;
+						
+						*/
+						
+						
+						/*var colorThief = new ColorThief();
+						var color= colorThief.getColor(img[0]);
+						
+						img.parents(".sl-slide-inner:first").css({
+									
+							background: "rgb("+color+")",
+									
+						});*/
+							
+						
+						
+						return;
+						
+						RGBaster.colors(img[0], {
+						success: function(payload) {
+							
+							img.parents(".sl-slide-inner:first").css({
+									
+										background: payload.dominant,
+									
+									});
+							
+							// You now have the payload.
+							console.log(payload.dominant);
+							console.log(payload.secondary);
+							console.log(payload.palette);
+							}
+						});
+						
+						
+						 return;
+						
+						
+						
+						
+						
 						$.adaptiveBackground.run({
 							
 								success($img, data) {
+								
+									alert(data.color);
 									
 									$img.parents(".sl-slide-inner:first").css({
 									
@@ -302,25 +360,51 @@
 				
 				that.slitslider.add(items);
 				
-				that.slitslider.jump(that.slideIndex);
+				var img = $(".img-"+(that.slideIndex));
 				
-				that.slideIndex++;
+				
+				RGBaster.colors(img[0], {
+						success: function(payload) {
+							
+							img.parents(".sl-slide-inner:first").css({
+									
+										background: payload.dominant,
+										
+									
+									});
+							
+							
+							that.slitslider.jump(that.slideIndex);
 
-					
+							
+							// You now have the payload.
+							console.log(payload.dominant);
+							console.log(payload.secondary);
+							console.log(payload.palette);
+							}
+						});
+				
+				
+				
+												
+				that.slideIndex++;
+				
+						
+			
+	
 			},	
 			
 			pushNewSlide(){
 					
 					var obj = this.getNewSlideContent();
-					
-					console.log(this.slideIndex);
-					
+										
 					this.addNewSlide(obj);
 			
 			},
 			
 		
-		}
+		},
+		
 		
 	}
 	

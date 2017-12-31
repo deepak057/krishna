@@ -72,11 +72,13 @@
           } else {
             var img = useCSSBackground() ? getCSSBackground() : $this[0];
           }
+		  
 
           RGBaster.colors(img, {
             paletteSize: 20,
             exclude: opts.exclude,
-            success: function (colors) {
+            success: function (colors) {		  
+
               $this.attr(DATA_COLOR, colors.dominant);
               $this.trigger(EVENT_CF, {
                 color: colors.dominant,
