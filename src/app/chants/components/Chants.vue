@@ -46,7 +46,7 @@
 					"Hare Ram Hare Ram Ram Ram Hare Hare Hare Krishna Hare Krishna Krishna Krishna Hare Hare",
 					"Hare Rama Hare Rama Rama Rama Hare Hare Hare Krishna Hare Krishna Krishna Krishna Hare Hare",
 					"hey",
-					"one",
+					"1",
 					"change",
 				
 				],
