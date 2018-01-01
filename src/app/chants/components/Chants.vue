@@ -45,7 +45,9 @@
 				
 					"Hare Ram Hare Ram Ram Ram Hare Hare Hare Krishna Hare Krishna Krishna Krishna Hare Hare",
 					"Hare Rama Hare Rama Rama Rama Hare Hare Hare Krishna Hare Krishna Krishna Krishna Hare Hare",
-
+					"hey",
+					"one",
+					"change",
 				
 				],
 				
@@ -188,16 +190,15 @@
 			var that = this;
 		
 		  this.$refs.theModal.open();
-		  //this.recognition.start();
+		  this.recognition.start();
 		  
-		  setTimeout(function(){
+		  /*setTimeout(function(){
 		  
 			that.setValue(that.mhaMantra[0]);
-			EventBus.$emit("push-new-slide");
 			
 
 		  
-		  }, 2000);
+		  }, 2000);*/
 		  
 	
 	},
@@ -240,10 +241,13 @@
 			
 			
 			updateImage(){
-			
+				
+				EventBus.$emit("push-new-slide");
+				
 				this.$refs.theModal.close();
+				
+				
 			
-				//this.currentImage = this.images[Math.floor(Math.random() * this.images.length)];
 			
 			},
 		

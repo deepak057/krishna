@@ -63,13 +63,16 @@
 			window.onload = function(){
 			
 				that.initSlider();
+				EventBus.$on("push-new-slide", function(){
+			
+					that.pushNewSlide();			
+			
+				});
+			
+			
 			}
 			
-			EventBus.$on("push-new-slide", function(){
 			
-				that.pushNewSlide();			
-			
-			});
 			
 		},
 		
