@@ -9,6 +9,8 @@ if (!process.env.NODE_ENV) {
 const opn = require('opn')
 const path = require('path')
 const express = require('express')
+const https = require('https')
+const fs = require ('fs')
 const webpack = require('webpack')
 const proxyMiddleware = require('http-proxy-middleware')
 const webpackConfig = (process.env.NODE_ENV === 'testing' || process.env.NODE_ENV === 'production')
@@ -94,7 +96,20 @@ devMiddleware.waitUntilValid(() => {
     if (autoOpenBrowser && process.env.NODE_ENV !== 'testing') {
       opn(uri)
     }
-    server = app.listen(port)
+
+
+var secureServer = https.createServer({
+    key: fs.readFileSync('certs/server.key'),
+    cert: fs.readFileSync('certs/server.crt'),
+    ca: fs.readFileSync('certs/ca.crt'),
+    requestCert: true,
+    rejectUnauthorized: false
+	}, app).listen(port, function() {
+    //console.log("Secure Express server listening on port 8443");
+	});
+
+
+    //server = app.listen(port)
     _resolve()
   })
 })

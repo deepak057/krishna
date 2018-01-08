@@ -1,0 +1,102 @@
+
+> krishna@1.0.0 dev /var/www/html/krishna
+> node build/dev-server.js
+
+> Starting dev server...
+ ERROR  Failed to compile with 1 errors11:56:25 AM
+
+ error  in ./src/app/App.vue
+
+Syntax Error: Unexpected token {
+
+
+ @ ./src/app/index.js 3:0-39
+ @ ./src/main.js
+ @ multi ./build/dev-client ./src/main.js
+
+> Listening at http://localhost:8080
+
+
+> krishna@1.0.0 dev /var/www/html/krishna
+> node build/dev-server.js
+
+> Starting dev server...
+ ERROR  Failed to compile with 1 errors11:56:52 AM
+
+ error  in ./src/app/App.vue
+
+Syntax Error: Unexpected token {
+
+
+ @ ./src/app/index.js 3:0-39
+ @ ./src/main.js
+ @ multi ./build/dev-client ./src/main.js
+
+> Listening at http://localhost:8080
+
+
+> krishna@1.0.0 dev /var/www/html/krishna
+> node build/dev-server.js
+
+> Starting dev server...
+ DONE  Compiled successfully in 5519ms11:57:53 AM
+
+> Listening at http://localhost:8081
+
+Killed
+Killed
+
+npm ERR! Linux 3.13.0-125-generic
+npm ERR! argv "/home/ubuntu/.nvm/versions/node/v6.10.1/bin/node" "/home/ubuntu/.nvm/versions/node/v6.10.1/bin/npm" "run" "dev"
+npm ERR! node v6.10.1
+npm ERR! npm  v3.10.10
+npm ERR! code ELIFECYCLE
+npm ERR! krishna@1.0.0 dev: `node build/dev-server.js`
+npm ERR! Exit status 137
+npm ERR! 
+npm ERR! Failed at the krishna@1.0.0 dev script 'node build/dev-server.js'.
+npm ERR! Make sure you have the latest version of node.js and npm installed.
+npm ERR! If you do, this is most likely a problem with the krishna package,
+npm ERR! not with npm itself.
+npm ERR! Tell the author that this fails on your system:
+npm ERR!     node build/dev-server.js
+npm ERR! You can get information on how to open an issue for this project with:
+npm ERR!     npm bugs krishna
+npm ERR! Or if that isn't available, you can get their info via:
+npm ERR!     npm owner ls krishna
+npm ERR! There is likely additional logging output above.
+
+npm ERR! Please include the following file with any support request:
+npm ERR!     /var/www/html/krishna/npm-debug.log
+
+npm ERR! Linux 3.13.0-125-generic
+npm ERR! argv "/home/ubuntu/.nvm/versions/node/v5.6.0/bin/node" "/home/ubuntu/.nvm/versions/node/v5.6.0/bin/npm" "run" "dev"
+npm ERR! node v5.6.0
+npm ERR! npm  v3.6.0
+npm ERR! code ELIFECYCLE
+npm ERR! krishna@1.0.0 dev: `node build/dev-server.js`
+npm ERR! Exit status 137
+npm ERR! 
+npm ERR! Failed at the krishna@1.0.0 dev script 'node build/dev-server.js'.
+npm ERR! Make sure you have the latest version of node.js and npm installed.
+npm ERR! If you do, this is most likely a problem with the krishna package,
+npm ERR! not with npm itself.
+npm ERR! Tell the author that this fails on your system:
+npm ERR!     node build/dev-server.js
+npm ERR! You can get information on how to open an issue for this project with:
+npm ERR!     npm bugs krishna
+npm ERR! Or if that isn't available, you can get their info via:
+npm ERR!     npm owner ls krishna
+npm ERR! There is likely additional logging output above.
+
+npm ERR! Please include the following file with any support request:
+npm ERR!     /var/www/html/krishna/npm-debug.log
+
+> krishna@1.0.0 dev /var/www/html/krishna
+> node build/dev-server.js
+
+> Starting dev server...
+ DONE  Compiled successfully in 5543ms11:59:36 AM
+
+> Listening at http://localhost:8080
+
