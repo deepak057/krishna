@@ -5,8 +5,14 @@
 			</div>
 			<div slot="body">
 				<div class="text-center">
-					 <img src="static/images/mic.png" />
+					<!-- <img src="static/images/mic.png" />-->
+					
+					<div class="circle-loader">
+						<div class="checkmark draw"></div>
+					</div>
+					
 					<h1>{{message}}</h1>
+					
 					<p v-show="chantsCount" class="chants-meta">You have chanted <a :title="!showChants? 'Show Chants': 'Hide Chants'"  @click="showChants= !showChants" hrfe="#" class="pointer hover-underline">{{chantsCount}}</a> times</p>
 					<p v-show="showChants" v-html="chants" class="chants-container text-success text-center"></p>
 				</div>
@@ -246,8 +252,6 @@
 				
 				this.$refs.theModal.close();
 				
-				
-			
 			
 			},
 		
