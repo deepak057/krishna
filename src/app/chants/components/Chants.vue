@@ -11,10 +11,14 @@
 						<div v-show="success" class="checkmark draw"></div>
 					</div>
 					
-					<h1>{{message}}</h1>
+					<h1 :class="{'blink-text': success}">{{message}}</h1>
 					
-					<p v-show="chantsCount" class="chants-meta">You have chanted <a :title="!showChants? 'Show Chants': 'Hide Chants'"  @click="showChants= !showChants" hrfe="#" class="pointer hover-underline">{{chantsCount}}</a> times</p>
-					<p v-show="showChants" v-html="chants" class="chants-container text-success text-center"></p>
+					<div v-show="!success">
+						<p v-show="chantsCount" class="chants-meta">You have chanted <a :title="!showChants? 'Show Chants': 'Hide Chants'"  @click="showChants= !showChants" hrfe="#" class="pointer hover-underline">{{chantsCount}}</a> times</p>
+						<p v-show="showChants" v-html="chants" class="chants-container text-success text-center"></p>
+					
+					</div>
+					
 				</div>
 			</div>
 		</bootstrap-modal> 
@@ -147,6 +151,13 @@
 				that.trigger();
 			
 			});
+			
+			
+			EventBus.$on('close-mic-popup', function(){
+			
+				that.closePopup();
+			
+			});
 				
 			var par = this;
 					
@@ -172,7 +183,10 @@
 					  var mobileRepeatBug = (current == 1 && transcript == event.results[0][0].transcript);
 
 							if(!mobileRepeatBug) {
-							  par.setValue(transcript)
+							
+							  par.speechDetected(transcript)
+							
+							
 							}
 
 				}
@@ -200,35 +214,39 @@
 			this.speechError = false;
 		
 		  this.$refs.theModal.open();
-		  //this.recognition.start();
+		  this.recognition.start();
 		  
-		  setTimeout(function(){
+		  /*setTimeout(function(){
 		  
 			//that.setValue(that.mhaMantra[0]);
 			that.speechSuccess();
 			//that.speechFailed();
 
 		  
-		  }, 2000);
+		  }, 2000);*/
 		  
 	
 	},
 	
-	setValue(value_){
-			
+	speechDetected(value_){
+	
 		if(this.mhaMantra.indexOf(value_)!=-1){
 		
 			this.speechSuccess();				
 		}
 		
 		else {
-		
-			this.message = value_;
-			
+					
 			this.speechFailed();
 		
 		}
 	
+	
+	},
+	
+	setValue(value_){
+			
+			this.message = value_;
 			
 	},
 	
@@ -241,7 +259,14 @@
 		
 		this.preloaderSuccess();
 		
-		//EventBus.$emit("push-new-slide");
+		this.setValue("Hare Krishna, loading....");
+		
+		setTimeout(function(){
+			
+			EventBus.$emit("push-new-slide");
+
+		
+		}, 500);
 		
 		
 	},

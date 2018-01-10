@@ -333,23 +333,7 @@
 						
 						
 						
-						$.adaptiveBackground.run({
-							
-								success($img, data) {
-								
-									alert(data.color);
-									
-									$img.parents(".sl-slide-inner:first").css({
-									
-										background: data.color,
-									
-									}).addClass("color-added");
-									
-								
-								}
-	
-							
-						});
+						
 					}	
 				
 			},
@@ -374,16 +358,13 @@
 										background: payload.dominant,
 										
 									
-									});
+							});
 							
 							
 							that.slitslider.jump(that.slideIndex);
 
+							EventBus.$emit("close-mic-popup");
 							
-							// You now have the payload.
-							console.log(payload.dominant);
-							console.log(payload.secondary);
-							console.log(payload.palette);
 							}
 						});
 				
