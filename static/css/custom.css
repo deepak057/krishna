@@ -124,8 +124,45 @@
 }
 
 .checkmark {
-  display: none;
+  /*display: none;*/
 }
+
+.circle-loader.success {
+	border-left-color: #5cb85c !important;
+}
+
+.circle-loader.success.load-complete{
+	
+	border-color: #5cb85c !important;
+	
+}
+
+.circle-loader.success .checkmark:after{
+	
+	border-right: 2px solid #5cb85c !important;
+	border-top: 2px solid #5cb85c !important;
+	
+}
+
+
+.circle-loader.error{
+	border-left-color: #d9534f !important;
+}
+
+
+.circle-loader.error.load-complete{
+	
+	border-color: #d9534f !important;
+	
+}
+
+.circle-loader.error .checkmark:after{
+	
+	border-right: 2px solid #d9534f !important;
+	border-top: 2px solid #d9534f !important;
+	
+}
+
 
 .checkmark.draw:after {
   animation-duration: 800ms;

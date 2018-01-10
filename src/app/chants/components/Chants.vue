@@ -7,8 +7,8 @@
 				<div class="text-center">
 					<!-- <img src="static/images/mic.png" />-->
 					
-					<div class="circle-loader">
-						<div class="checkmark draw"></div>
+					<div :class="['circle-loader', {'success': success, error: speechError, 'load-complete': success || speechError } ]">
+						<div v-show="success" class="checkmark draw"></div>
 					</div>
 					
 					<h1>{{message}}</h1>
@@ -47,6 +47,9 @@
 				chantsCount: 2,
 				chants: "",
 				showChants: false,
+				success: false,
+				speechError: false,
+				
 				mhaMantra: [
 				
 					"Hare Ram Hare Ram Ram Ram Hare Hare Hare Krishna Hare Krishna Krishna Krishna Hare Hare",
@@ -138,16 +141,13 @@
   mounted(){
 			
 			var that = this;
-		
 			
 			EventBus.$on('trigger-mic',function(){
 			
 				that.trigger();
 			
 			});
-		
-			this.afterUpdate();
-		
+				
 			var par = this;
 					
 			try {
@@ -194,88 +194,105 @@
 	trigger(){
 		
 			var that = this;
+			
+			/*reset these bools */	
+			this.success = false;
+			this.speechError = false;
 		
 		  this.$refs.theModal.open();
-		  this.recognition.start();
+		  //this.recognition.start();
 		  
-		  /*setTimeout(function(){
+		  setTimeout(function(){
 		  
-			that.setValue(that.mhaMantra[0]);
-			
+			//that.setValue(that.mhaMantra[0]);
+			that.speechSuccess();
+			//that.speechFailed();
 
 		  
-		  }, 2000);*/
+		  }, 2000);
 		  
 	
 	},
 	
 	setValue(value_){
 			
-				if(this.mhaMantra.indexOf(value_)!=-1){
-				
-					this.chantsCount++;
-									
-				}
-				
-				else {
-				
-					this.message = value_;
-				
-				}
-			
-			
-			},
-			
-			
-			updateChants(){
-			
-				if(this.chantsCount){
-				
-					this.chants = "";
-				
-					for( var i=1; i<=this.chantsCount; i++){
-					
-						this.chants += '&#10003; '+this.mhaMantra[0]+'<br/>';
-					
-					}
-					
-					return this.chants;
-				
-				}
-			
-			},
-			
-			
-			updateImage(){
-				
-				EventBus.$emit("push-new-slide");
-				
-				this.$refs.theModal.close();
-				
-			
-			},
+		if(this.mhaMantra.indexOf(value_)!=-1){
 		
-			afterUpdate(){
-			
-				this.updateChants();
-				
-				this.updateImage();
-			
-			}
-	
-  },
-  
-  watch: {
+			this.speechSuccess();				
+		}
 		
-			chantsCount(newv, oldv){
+		else {
+		
+			this.message = value_;
 			
-				this.afterUpdate();
-			
-			},
+			this.speechFailed();
 		
 		}
 	
-	}
+			
+	},
+	
+	
+	speechSuccess(){
+	
+		this.chantsCount++;
+		
+		this.updateChants();
+		
+		this.preloaderSuccess();
+		
+		//EventBus.$emit("push-new-slide");
+		
+		
+	},
+
+	preloaderSuccess(){
+	
+		this.success = true;
+	
+	},
+	
+	preloaderError(){
+	
+		this.speechError = true;
+	},
+	
+	speechFailed(){
+	
+		this.preloaderError();
+		
+	
+	},
+	
+	closePopup(){
+	
+		this.$refs.theModal.close();
+	
+	},
+	
+	updateChants(){
+	
+		if(this.chantsCount){
+		
+			this.chants = "";
+		
+			for( var i=1; i<=this.chantsCount; i++){
+			
+				this.chants += '&#10003; '+this.mhaMantra[0]+'<br/>';
+			
+			}
+			
+			return this.chants;
+		
+		}
+	
+	},
+	
+	
+  },
+  
+  
+}
 
 	
 </script>
