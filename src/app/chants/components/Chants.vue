@@ -13,7 +13,7 @@
 					
 					<h1 :class="{'blink-text': success}">{{message}}</h1>
 					
-					<div v-show="!success">
+					<div v-show="!success && !speechError">
 						<p v-show="chantsCount" class="chants-meta">You have chanted <a :title="!showChants? 'Show Chants': 'Hide Chants'"  @click="showChants= !showChants" hrfe="#" class="pointer hover-underline">{{chantsCount}}</a> times</p>
 						<p v-show="showChants" v-html="chants" class="chants-container text-success text-center"></p>
 					
@@ -192,14 +192,19 @@
 				}
 				
 				this.recognition.onspeechend = function() {
-				  par.setValue(par.messages[2]);
+				  //par.setValue(par.messages[2]);
 				  //par.recognition.start();
 				}
 
 				this.recognition.onerror = function(event) {
 				  if(event.error == 'no-speech') {
-					par.setValue(par.messages[3]);  
-				  };
+					
+					par.setValue(par.messages[3]); 
+					
+					par.closePopup(2000);
+					
+				  }
+				  
 				}
 		},
 		
@@ -286,13 +291,30 @@
 	
 		this.preloaderError();
 		
+		this.setValue("Not right, chant again.");
+		
+		this.closePopup(2000);
 	
 	},
 	
-	closePopup(){
+	closePopup(timeout_){
 	
-		this.$refs.theModal.close();
-	
+		if(timeout_){
+			
+			var that = this;
+			
+			setTimeout(function(){
+			
+				that.$refs.theModal.close();
+			
+			}, timeout_);
+		
+		}
+		
+		else {
+		
+			this.$refs.theModal.close();
+		}
 	},
 	
 	updateChants(){
