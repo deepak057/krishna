@@ -7,9 +7,15 @@
 				<div class="text-center">
 					<!-- <img src="static/images/mic.png" />-->
 					
-					<div :class="['circle-loader', {'success': success, error: speechError, 'load-complete': success || speechError } ]">
+					<div v-show="!speechError" :class="['circle-loader', {'success': success, error: speechError, 'load-complete': success || speechError } ]">
 						<div v-show="success" class="checkmark draw"></div>
 					</div>
+					
+					<svg  v-show="speechError" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
+					  <circle class="path circle" fill="none" stroke="#d9534f" stroke-width="2" stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1"/>
+					  <line class="path line" fill="none" stroke="#d9534f" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" x1="34.4" y1="37.9" x2="95.8" y2="92.3"/>
+					  <line class="path line" fill="none" stroke="#d9534f" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" x1="95.8" y1="38" x2="34.4" y2="92.2"/>
+					</svg>
 					
 					<h1 :class="{'blink-text': success}">{{message}}</h1>
 					
