@@ -54,7 +54,7 @@
 	
 				recognition: '',
 				message: 'Listening...',
-				chantsCount: 2,
+				chantsCount: 0,
 				chants: "",
 				showChants: false,
 				success: false,
