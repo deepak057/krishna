@@ -67,8 +67,8 @@
 			});
 			
 			EventBus.$on("init-slider", function(){
-									
-				that.initSlider();
+								
+				that.initSlider();					
 				
 			});
 			
@@ -83,7 +83,6 @@
 				slitslider: {},
 				page: {},
 				slideIndex: 1,
-				
 				
 				content: [
 				

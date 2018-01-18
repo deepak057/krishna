@@ -283,7 +283,16 @@ svg {
   }
 }
 
+.show{
+	
+	display: block;
+}
 
+.hide{
+	
+	display: none;
+	
+}
 
 .loader {
   position: absolute;
