@@ -60,18 +60,17 @@
 			
 			this.getNewSlideContent();
 			
-			window.onload = function(){
-			
-				that.initSlider();
-				EventBus.$on("push-new-slide", function(){
+			EventBus.$on("push-new-slide", function(){
 			
 					that.pushNewSlide();			
 			
-				});
+			});
 			
-			
-			}
-			
+			EventBus.$on("init-slider", function(){
+									
+				that.initSlider();
+				
+			});
 			
 			
 		},
