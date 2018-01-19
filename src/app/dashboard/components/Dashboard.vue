@@ -14,10 +14,8 @@
 		</div>
 		
 		<div v-if="pageLoaded">
-			<div class="speak-button">
-				<img @click="clicked()" src="static/images/speak.png" />
-			</div>
-					
+			
+			<chant_button></chant_button>		
 			<slider></slider>
 			<chants></chants>
 		
@@ -32,12 +30,15 @@
 	import EventBus from '../../event-bus';
 	import { Slider } from '../../slider/components';
 	import { Chants } from '../../chants/components';
+	import { ChantButton } from '../../chant_button/components';
+
 	
 	export default {
 	
 		components: {
 			Slider,
-			Chants
+			Chants,
+			"chant_button": ChantButton
 		},
 		
 		data(){
@@ -76,15 +77,7 @@
 		},
 	
 		name: 'dashboard',
-		methods: {
-  
-			clicked(){
-			
-				EventBus.$emit('trigger-mic');
-							
-			}
-  
-		}
+		
   	
 	}
 

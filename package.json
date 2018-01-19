@@ -13,7 +13,9 @@
     "test": "npm run unit && npm run e2e"
   },
   "dependencies": {
+    "jquery": "^3.2.1",
     "vue": "^2.5.2",
+    "vue-localstorage": "^0.6.1",
     "vue-router": "^3.0.1",
     "vue2-bootstrap-modal": "^0.1.14"
   },
