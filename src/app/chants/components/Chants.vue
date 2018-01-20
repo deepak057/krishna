@@ -36,6 +36,10 @@
 <script>
 	
 	import EventBus from '../../event-bus';
+	import Vue from 'vue';
+	import VueLocalStorage from 'vue-localstorage'
+	
+	Vue.use(VueLocalStorage);
 	
 	export default {
 	
@@ -54,7 +58,7 @@
 	
 				recognition: '',
 				message: 'Listening...',
-				chantsCount: 0,
+				chantsCount: Vue.localStorage.get("chantsCount", 0),
 				chants: "",
 				showChants: false,
 				success: false,
@@ -148,9 +152,21 @@
   
   },
   
+  watch: {
+  
+	chantsCount(new_v, old_v){
+	
+		Vue.localStorage.set("chantsCount", new_v);
+	
+	},
+  
+  },
+  
   mounted(){
 			
 			var that = this;
+			
+			//this.chantsCount = ;
 			
 			EventBus.$on('trigger-mic',function(){
 			

@@ -19,12 +19,6 @@
 	
 		name: 'chant_button',
 		
-		components: {
-		
-			//'ls': require('vue-localstorage')
-		
-		},
-		
 		data(){
 		
 			return {

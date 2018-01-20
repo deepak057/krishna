@@ -1,6 +1,10 @@
 <template>
+	
+	<div>
+	
+		<page_loader v-show="!showSlider"></page_loader>
 
-	<div class="container demo-1">
+		<div class="container demo-1" v-if="showSlider">
 		
             <!--<nav class="codrops-demos">
 				<a class="current-demo" href="index.html">Demo 1</a>
@@ -43,31 +47,43 @@
 
         </div>
 	
+	
+	</div>
+
+	
 
 </template>
 
 <script>
 	
 	import EventBus from '../../event-bus';
+	import { PageLoader } from '../../page_loader/components';
+
 
 	const slider =  {
 	
 		name: 'slider',
 		
+		components: {
+		
+			"page_loader": PageLoader
+		
+		},
+		
 		mounted(){
 		
 			var that = this;
 			
-			this.getNewSlideContent();
+			this.firstSlideContent = this.getNewSlideContent();
 			
 			EventBus.$on("push-new-slide", function(){
 			
-					that.pushNewSlide();			
+				that.pushNewSlide();			
 			
 			});
 			
 			EventBus.$on("init-slider", function(){
-								
+											
 				that.initSlider();					
 				
 			});
@@ -83,6 +99,8 @@
 				slitslider: {},
 				page: {},
 				slideIndex: 1,
+				firstSlideContent: false,
+				showSlider: false,
 				
 				content: [
 				
@@ -196,32 +214,51 @@
 			
 			initSlider(){
 			
+				var that = this;
+				
+				this.getImageColor(this.firstSlideContent.image).then(function(c){
+				
+					that.showSlider= true;
+				
+					setTimeout(function(){
+					
+						that.createSlider();	
+
+						that.applyColor(1,c);
+					
+					}, 1)						
+				
+				});
+				
+			},
+			
+			
+			
+			createSlider(){
+				
 				var that = this,
 				$navArrows = $( '#nav-arrows' );
 				
-					
 				this.slitslider = $( '#slider' ).slitslider( {
-							onBeforeChange : function( slide, pos ) { 
-							
-								
-							},
-							
-							onAfterChange: function(slide, pos){
-								
-								var $nav = that.getNav();
+					onBeforeChange : function( slide, pos ) { 
+					
+						
+					},
+					
+					onAfterChange: function(slide, pos){
+						
+						var $nav = that.getNav();
 
-								$nav.removeClass( 'nav-dot-current' );
-								$nav.eq( pos ).addClass( 'nav-dot-current' );
-
-								
-								that.applySlideColor(pos)	
+						$nav.removeClass( 'nav-dot-current' );
+						$nav.eq( pos ).addClass( 'nav-dot-current' );
 							
-							},
-							
-						} );
+						//that.applySlideColor(pos);	
+					
+					},
+					
+				});
 						
-						
-						
+												
 				// add navigation events
 				$navArrows.children( ':last' ).on( 'click', function() {
 
@@ -239,9 +276,10 @@
 
 				});
 				
-				this.applySlideColor(1);
-				
+			
+			
 			},
+			
 			
 			getNav(){
 			
@@ -265,122 +303,86 @@
 							
 			},
 			
+			
+			getImage(pos){
+			
+				return $(".img-"+(pos));
+			
+			},
+			
+			applyColor(pos, color){
+			
+				var img = this.getImage(pos);
+			
+				img.parents(".sl-slide-inner:first").css({
+									
+					background: color,
+													
+				});
+						
+			},
+			
 			applySlideColor(pos){
 				
-					$( ".content-image").removeAttr("data-adaptive-background");
-
-					var img = $(".img-"+(pos));
-					
-					if(!img.parents(".sl-slide-inner:first").hasClass("color-added")){
-					
-						img.attr("data-adaptive-background", "");
-						
-						
-					/*var blob = new Blob([
-					"onmessage = function(e) { var data = e.data; alert(data.e);  postMessage('msg from worker');}"]);
-
-					// Obtain a blob URL reference to our worker 'file'.
-					var blobURL = window.URL.createObjectURL(blob);
-
-					var worker = new Worker(blobURL);
-					worker.onmessage = function(e) {
-					  alert(e.data);
-					};
-					
-					var e=document.createElement('canvas');
-					worker.postMessage({e:e}); // Start the worker.
-									
-						return ;
-						
-						*/
-						
-						
-						/*var colorThief = new ColorThief();
-						var color= colorThief.getColor(img[0]);
-						
-						img.parents(".sl-slide-inner:first").css({
-									
-							background: "rgb("+color+")",
-									
-						});*/
-							
-						
-						
-						return;
-						
-						RGBaster.colors(img[0], {
-						success: function(payload) {
-							
-							img.parents(".sl-slide-inner:first").css({
-									
-										background: payload.dominant,
-									
-									});
-							
-							// You now have the payload.
-							console.log(payload.dominant);
-							console.log(payload.secondary);
-							console.log(payload.palette);
-							}
-						});
-						
-						
-						 return;
-						
-						
-						
-						
-						
-						
-					}	
+				var img = this.getImage(pos),
+					that = this;
 				
+				img.one("load", function(){
+				
+					that.getImageColor(img[0]).then(function(color){
+					
+						that.applyColor(pos, color);
+						
+						EventBus.$emit("close-mic-popup");
+						
+						that.slitslider.jump(pos);
+											
+						
+					});				
+			
+				});
+			
+			
 			},
 
+			
+			getImageColor(img){
+			
+				return new Promise(function(resolve, reject){
+				
+					RGBaster.colors(img, 
+						{
+							success: function(payload) {				
+							
+								resolve(payload.dominant);
+											
+							}
+						});
+							
+				});
+							
+			},
 			
 			addNewSlide(obj){
 				
 				var that = this;
 				
+				this.slideIndex++;
+
 				var items = $('<div class="sl-slide"  data-orientation="'+ (that.slideIndex%2==0? "horizontal": "vertical") +'" data-slice1-rotation="'+that.getRandomInteger()+'" data-slice2-rotation="'+that.getRandomInteger()+'" data-slice1-scale="'+that.getRandomInteger(2)+'" data-slice2-scale="'+that.getRandomInteger(2)+'" ><div class="sl-slide-inner"><div class="deco"><div class="circle"><img class="img-'+that.slideIndex+' content-image br" src="'+obj.image+'"  /></div></div><h2>'+obj.heading+'</h2><blockquote><p>'+obj.content+'</p><cite>'+obj.muted+'</cite></blockquote></div></div>');
 				
-				that.slitslider.add(items);
-				
-				var img = $(".img-"+(that.slideIndex));
-				
-				
-				RGBaster.colors(img[0], {
-						success: function(payload) {
+				this.slitslider.add(items);
 							
-							img.parents(".sl-slide-inner:first").css({
-									
-										background: payload.dominant,
-										
-									
-							});
-							
-							
-							that.slitslider.jump(that.slideIndex);
-
-							EventBus.$emit("close-mic-popup");
-							
-							}
-						});
-				
-				
-				
-												
-				that.slideIndex++;
-				
-						
-			
+				this.applySlideColor(this.slideIndex);
+					
 	
 			},	
 			
 			pushNewSlide(){
 					
-					var obj = this.getNewSlideContent();
-										
-					this.addNewSlide(obj);
+				var obj = this.getNewSlideContent();
+									
+				this.addNewSlide(obj);
 			
 			},
 			
