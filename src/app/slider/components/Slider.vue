@@ -144,8 +144,8 @@
 					
 					{
 					
-						heading: "Abandon all attachment to the results..",
-						content: "of action and attain supreme peace. When a person is devoted to something with complete faith, I unify his faith in that.",
+						heading: "Abandon all attachment to the..",
+						content: "results of action and attain supreme peace. When a person is devoted to something with complete faith, I unify his faith in that.",
 						muted: 'Krishna',
 						image: 'static/images/krishna-images-17.jpg',
 
@@ -162,8 +162,8 @@
 					
 					{
 					
-						heading: "It is Nature that causes all movement...",
-						content: 'Deluded by the ego, the fool harbors the perception that says "I did it".',
+						heading: "It is Nature that causes all ..",
+						content: 'movement. Deluded by the ego, the fool harbors the perception that says "I did it".',
 						muted: 'Krishna',
 						image: 'static/images/gita-109.jpg',
 
