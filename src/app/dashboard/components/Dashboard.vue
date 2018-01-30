@@ -50,7 +50,7 @@
 				setTimeout(function(){
 				
 					EventBus.$emit("init-slider");
-	
+						
 				}, 1);
 										
 			};

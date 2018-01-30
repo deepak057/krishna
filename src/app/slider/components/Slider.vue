@@ -107,9 +107,9 @@
 				
 					{
 					
-						heading: 'A BENE PLACITO',
-						content: 'You have just dined, and however scrupulously the slaughterhouse is concealed in the graceful distance of miles, there is complicity.',
-						muted: 'RALPH WALDO EMERSON',
+						heading: 'Live your own path',
+						content: 'Far better to live your own path imperfectly than to live another’s perfectly.',
+						muted: 'Krishna',
 						image: 'static/images/hqdefault.jpg',
 
 					
@@ -117,42 +117,143 @@
 					
 					{
 					
-						heading: 'Regula aurea',
-						content: 'Until he extends the circle of his compassion to all living things, man will not himself find peace.',
-						muted: 'ALBERT SCHWEITZER',
+						heading: "Don't abandon duties...",
+						content: '..because you see defects in them. Every action, every activity, is surrounded by defects as a fire is surrounded by smoke.',
+						muted: 'Krishna',
 						image: 'static/images/slide 10 Arjuna and Krishna.jpg',
 					
 					},
 					
 					{
 					
-						heading: 'DUM SPIRO, SPERO',
-						content: "Thousands of people who say they 'love' animals sit down once or twice a day to enjoy the flesh of creatures who have been utterly deprived of everything that could make their lives worth living and who endured the awful suffering and the terror of the abattoirs.",
-						muted: 'DAME JANE MORRIS GOODALL',
+						heading: "Whatever happened was good..",
+						content: "what's happening, it's going well, whatever will happen, will also be good.",
+						muted: 'Krishna',
 						image: 'static/images/aec354cbe438e514c7ff271e84e49d3f--krishna-pictures-krishna-photos.jpg',
 
 					},
 					
 					{
 					
-						heading: 'Supersoul is everywhere',
-						content: "We are all pieces and parcels of Supreme Personality of Godhead",
-						muted: 'LORD KRISHNA',
-						image: 'static/images/003-Sri_Sri_Krishna_Balaram.jpg',
+						heading: "Reshape yourself through ..",
+						content: "the power of your will. Those who have conquered themselves…live in peace, alike in cold and heat, pleasure and pain, praise and blame…",
+						muted: 'Krishna',
+						image: 'static/images/Lord-Hayagriva-The-Lesser-Known-Incarnation-of-Mahavishnu-2.jpg',
+
+					},
 					
+					{
 					
+						heading: "Abandon all attachment to the results..",
+						content: "of action and attain supreme peace. When a person is devoted to something with complete faith, I unify his faith in that.",
+						muted: 'Krishna',
+						image: 'static/images/krishna-images-17.jpg',
+
+					},
+					
+					{
+					
+						heading: "No one who does good work will..",
+						content: " ever come to a bad end, either here or in the world to come.",
+						muted: 'Krishna',
+						image: 'static/images/lord-krishna-110a.jpg',
+
+					},
+					
+					{
+					
+						heading: "It is Nature that causes all movement...",
+						content: 'Deluded by the ego, the fool harbors the perception that says "I did it".',
+						muted: 'Krishna',
+						image: 'static/images/gita-109.jpg',
+
+					},
+					
+					{
+					
+						heading: "Man is made by his belief.",
+						content: "As he believes, so he is. You can be anything that you want to be.",
+						muted: 'Krishna',
+						image: 'static/images/gita-100.jpg',
+
+					},
+					
+					{
+					
+						heading: "For the one who has conquered..",
+						content: "the mind..the mind is the best of friends. But for one who has failed to do so his very mind will be his greatest enemy",
+						muted: 'Krishna',
+						image: 'static/images/gita-110.jpg',
+
+					},
+					
+					{
+					
+						heading: "Lust, anger, and greed..",
+						content: " are three gates to this self-destructive hell. Pleasures of the senses give birth to misery.",
+						muted: 'Krishna',
+						image: 'static/images/gita-112.jpg',
+
+					},
+					
+					{
+					
+						heading: "Even if you were the most sinful...",
+						content: "of sinners you could cross beyond all sin by the raft of spiritual wisdom.",
+						muted: 'Krishna',
+						image: 'static/images/gita-136.jpg',
+
 					},
 					
 					
 					{
 					
-						heading: 'Supersoul is everywhere',
-						content: "We are all pieces and parcels of Supreme Personality of Godhead",
-						muted: 'LORD KRISHNA',
-						image: 'static/images/9ed179ec62ee53d81eb9a4199a2fbe4d.jpg',
-					
-					
+						heading: "We are kept from our goal..",
+						content: "not by obstacles, but by a clear path to a lesser goal.",
+						muted: 'Krishna',
+						image: 'static/images/gita-126.jpg',
+
 					},
+					
+		
+					{
+					
+						heading: "Strive to still your thoughts..",
+						content: "The mind is restless and difficult to restrain, but it is subdued by practice.",
+						muted: 'Krishna',
+						image: 'static/images/003-Sri_Sri_Krishna_Balaram.jpg',
+
+					},
+					
+					{
+					
+						heading: "One has to learn tolerance ..",
+						content: "in the face of dualities such as happiness and distress, or cold and warmth to become free from anxieties regarding gain and loss",
+						muted: 'Krishna',
+						image: 'static/images/gita-102.jpg',
+
+					},
+					
+					{
+					
+						heading: "You have the right to work, but..",
+						content: "never to the fruit of work. You should never engage in action for the sake of reward.",
+						muted: 'Krishna',
+						image: 'static/images/gita-103.jpg',
+
+					},
+					
+					
+					{
+					
+						heading: "Do your Dharma and leave..",
+						content: "the results to Krishna. Unwise are constantly anxious about the results of what they do.",
+						muted: 'Krishna',
+						image: 'static/images/Krishna Childhhod.jpg',
+
+					},
+					
+
 					
 					
 				],

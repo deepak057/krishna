@@ -192,8 +192,8 @@
 }
 
 .demo-1 .sl-slide h2 {
-	color: #000;
-	text-shadow: 0 0 1px #000;
+	color: /*#000*/#8b8b8b;
+	text-shadow: 0 0 1px /*#000*/ #8b8b8b;
 	padding: 20px;
 	position: absolute;
 	font-size: 34px;

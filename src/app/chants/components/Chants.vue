@@ -58,7 +58,7 @@
 	
 				recognition: '',
 				message: 'Listening...',
-				chantsCount: Vue.localStorage.get("chantsCount", 0),
+				chantsCount: parseInt(Vue.localStorage.get("chantsCount", 0)),
 				chants: "",
 				showChants: false,
 				success: false,
@@ -80,70 +80,10 @@
 					'Voice recognition activated. Try speaking into the microphone.',
 					'You were quiet for a while, so voice recognition turned itself off.',
 					'No speech was detected. Try again.',
+					"Hare Krishna, loading....",
+					"Not right, chant again.",
+					
 				
-				],
-				
-				images: [
-				
-					"http://www.hindugodwallpaper.com/images/gods/zoom/3196_shri-krishna-geeta-updesh.jpg",
-					"https://i.pinimg.com/564x/a3/76/29/a37629535cae48f26e2e7d914d74b651.jpg",
-					"http://wallpapers.iskcondesiretree.com/wp-content/wallpapers/artist/krishna_balaram/003-Sri_Sri_Krishna_Balaram.jpg",
-				
-				],
-				
-				content: [
-				
-				
-					{
-					
-						heading: 'A BENE PLACITO',
-						content: 'You have just dined, and however scrupulously the slaughterhouse is concealed in the graceful distance of miles, there is complicity.',
-						muted: 'RALPH WALDO EMERSON',
-						image: 'static/images/hqdefault.jpg',
-
-					
-					},
-					
-					{
-					
-						heading: 'Regula aurea',
-						content: 'Until he extends the circle of his compassion to all living things, man will not himself find peace.',
-						muted: 'ALBERT SCHWEITZER',
-						image: 'static/images/slide 10 Arjuna and Krishna.jpg',
-					
-					},
-					
-					{
-					
-						heading: 'DUM SPIRO, SPERO',
-						content: "Thousands of people who say they 'love' animals sit down once or twice a day to enjoy the flesh of creatures who have been utterly deprived of everything that could make their lives worth living and who endured the awful suffering and the terror of the abattoirs.",
-						muted: 'DAME JANE MORRIS GOODALL',
-						image: 'static/images/aec354cbe438e514c7ff271e84e49d3f--krishna-pictures-krishna-photos.jpg',
-
-					},
-					
-					{
-					
-						heading: 'Supersoul is everywhere',
-						content: "We are all pieces and parcels of Supreme Personality of Godhead",
-						muted: 'LORD KRISHNA',
-						image: 'static/images/003-Sri_Sri_Krishna_Balaram.jpg',
-					
-					
-					},
-					
-					
-					{
-					
-						heading: 'Supersoul is everywhere',
-						content: "We are all pieces and parcels of Supreme Personality of Godhead",
-						muted: 'LORD KRISHNA',
-						image: 'static/images/9ed179ec62ee53d81eb9a4199a2fbe4d.jpg',
-					
-					
-					},
-					
-					
 				],
 				
 				currentImage: '',
@@ -165,8 +105,8 @@
   mounted(){
 			
 			var that = this;
-			
-			//this.chantsCount = ;
+
+			$(this.$refs.theModal).on("hidden.bs.modal", this.afterModalClosed);
 			
 			EventBus.$on('trigger-mic',function(){
 			
@@ -255,10 +195,48 @@
 	
 	},
 	
+	countOccurrences(string, subString, allowOverlapping) {
+
+		string += "";
+		subString += "";
+		if (subString.length <= 0) return (string.length + 1);
+
+		var n = 0,
+			pos = 0,
+			step = allowOverlapping ? 1 : subString.length;
+
+		while (true) {
+			pos = string.indexOf(subString, pos);
+			if (pos >= 0) {
+				++n;
+				pos += step;
+			} else break;
+		}
+		return n;
+	},
+	
+	getChantsCount(speech_text){
+	
+		var count = 0;
+	
+		for (var i in this.mhaMantra){
+		
+			count += this.countOccurrences(speech_text, this.mhaMantra[i]);
+		
+		}
+		
+		return count;
+	
+	},
+	
 	speechDetected(value_){
 	
-		if(this.mhaMantra.indexOf(value_)!=-1){
+		var chantsCount = this.getChantsCount(value_);
 		
+		if(chantsCount){
+			
+			this.chantsCount+= chantsCount;
+			
 			this.speechSuccess();				
 		}
 		
@@ -267,7 +245,6 @@
 			this.speechFailed();
 		
 		}
-	
 	
 	},
 	
@@ -279,14 +256,12 @@
 	
 	
 	speechSuccess(){
-	
-		this.chantsCount++;
-		
+			
 		this.updateChants();
 		
 		this.preloaderSuccess();
 		
-		this.setValue("Hare Krishna, loading....");
+		this.setValue(this.messages[4]);
 		
 		setTimeout(function(){
 			
@@ -313,9 +288,23 @@
 	
 		this.preloaderError();
 		
-		this.setValue("Not right, chant again.");
+		this.setValue(this.messages[5]);
 		
 		this.closePopup(2000);
+	
+	},
+	
+	afterModalClosed(){alert("here");
+	
+		/*
+		** Stop the speech recognition engine if the popup 
+		** is closed
+		*/
+		if(this.recognition){
+		
+			this.recognition.stop();
+		
+		}
 	
 	},
 	
