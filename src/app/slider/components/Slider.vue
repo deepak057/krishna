@@ -142,7 +142,7 @@
 
 					},
 					
-					{
+					{
 					
 						heading: "Abandon all attachment to the..",
 						content: "results of action and attain supreme peace. When a person is devoted to something with complete faith, I unify his faith in that.",
@@ -230,7 +230,7 @@
 						heading: "One has to learn tolerance ..",
 						content: "in the face of dualities such as happiness and distress, or cold and warmth to become free from anxieties regarding gain and loss",
 						muted: 'Krishna',
-						image: 'static/images/gita-102.jpg',
+						image: 'static/images/gita-119.jpg',
 
 					},
 					
@@ -239,7 +239,7 @@
 						heading: "You have the right to work, but..",
 						content: "never to the fruit of work. You should never engage in action for the sake of reward.",
 						muted: 'Krishna',
-						image: 'static/images/gita-103.jpg',
+						image: 'static/images/maxresdefault.jpg',
 
 					},
 					
