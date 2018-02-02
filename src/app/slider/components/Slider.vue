@@ -19,7 +19,7 @@
 						<div class="sl-slide-inner">
 								<div class="deco">
 									<div class="circle">
-										<img :class="['img-'+(index+1), 'content-image br']" :src="item.image"  />
+										<img :class="['img-'+(index+1), 'content-image br']" :src="item.image.src"  />
 										
 									</div>
 								
@@ -47,10 +47,10 @@
 
         </div>
 	
+		<gallary></gallary>
 	
 	</div>
 
-	
 
 </template>
 
@@ -58,6 +58,8 @@
 	
 	import EventBus from '../../event-bus';
 	import { PageLoader } from '../../page_loader/components';
+	import { Gallary } from '../../gallary/components';
+
 
 
 	const slider =  {
@@ -66,7 +68,8 @@
 		
 		components: {
 		
-			"page_loader": PageLoader
+			"page_loader": PageLoader,
+			Gallary,
 		
 		},
 		
@@ -89,6 +92,14 @@
 			});
 			
 			
+			$(document).on("click", ".content-image", function(){
+			
+				var index_= $(".content-image").index(this);
+			
+				EventBus.$emit("jump-to-gallary-item", index_);
+			
+			})
+			
 		},
 		
 		data(){
@@ -110,7 +121,15 @@
 						heading: 'Live your own path',
 						content: 'Far better to live your own path imperfectly than to live another’s perfectly.',
 						muted: 'Krishna',
-						image: 'static/images/hqdefault.jpg',
+						image: {
+					
+							src: 'static/images/hqdefault.jpg',
+							h: 360,
+							w: 480,
+						
+						},
+						
+						
 
 					
 					},
@@ -120,7 +139,15 @@
 						heading: "Don't abandon duties...",
 						content: '..because you see defects in them. Every action, every activity, is surrounded by defects as a fire is surrounded by smoke.',
 						muted: 'Krishna',
-						image: 'static/images/slide 10 Arjuna and Krishna.jpg',
+						image: {
+						
+							src: 'static/images/slide 10 Arjuna and Krishna.jpg',
+							w: 1024,
+							h: 768,		
+						
+						},
+						
+						
 					
 					},
 					
@@ -129,7 +156,13 @@
 						heading: "Whatever happened was good..",
 						content: "what's happening, it's going well, whatever will happen, will also be good.",
 						muted: 'Krishna',
-						image: 'static/images/aec354cbe438e514c7ff271e84e49d3f--krishna-pictures-krishna-photos.jpg',
+						image: {
+						
+							src: 'static/images/aec354cbe438e514c7ff271e84e49d3f--krishna-pictures-krishna-photos.jpg',
+							w: 736,
+							h: 588,
+						
+						},
 
 					},
 					
@@ -138,7 +171,13 @@
 						heading: "Reshape yourself through ..",
 						content: "the power of your will. Those who have conquered themselves…live in peace, alike in cold and heat, pleasure and pain, praise and blame…",
 						muted: 'Krishna',
-						image: 'static/images/Lord-Hayagriva-The-Lesser-Known-Incarnation-of-Mahavishnu-2.jpg',
+						image: {
+						
+							src: 'static/images/Lord-Hayagriva-The-Lesser-Known-Incarnation-of-Mahavishnu-2.jpg',
+							w: 500,
+							h: 616,
+						
+						},
 
 					},
 					
@@ -147,7 +186,14 @@
 						heading: "Abandon all attachment to the..",
 						content: "results of action and attain supreme peace. When a person is devoted to something with complete faith, I unify his faith in that.",
 						muted: 'Krishna',
-						image: 'static/images/krishna-images-17.jpg',
+						image: {
+						
+						
+							src: 'static/images/krishna-images-17.jpg',
+							w: 564,
+							h: 752,
+						
+						},
 
 					},
 					
@@ -156,7 +202,13 @@
 						heading: "No one who does good work will..",
 						content: " ever come to a bad end, either here or in the world to come.",
 						muted: 'Krishna',
-						image: 'static/images/lord-krishna-110a.jpg',
+						image: {
+						
+							src: 'static/images/lord-krishna-110a.jpg',
+							w: 1024,
+							h: 768,
+						
+						},
 
 					},
 					
@@ -165,7 +217,13 @@
 						heading: "It is Nature that causes all ..",
 						content: 'movement. Deluded by the ego, the fool harbors the perception that says "I did it".',
 						muted: 'Krishna',
-						image: 'static/images/gita-109.jpg',
+						image: {
+						
+							src: 'static/images/gita-109.jpg',
+							w: 600,
+							h: 446,
+						
+						},
 
 					},
 					
@@ -174,7 +232,13 @@
 						heading: "Man is made by his belief.",
 						content: "As he believes, so he is. You can be anything that you want to be.",
 						muted: 'Krishna',
-						image: 'static/images/gita-100.jpg',
+						image: {
+						
+							src: 'static/images/gita-100.jpg',
+							w: 600,
+							h: 812,
+						
+						},
 
 					},
 					
@@ -183,7 +247,13 @@
 						heading: "For the one who has conquered..",
 						content: "the mind..the mind is the best of friends. But for one who has failed to do so his very mind will be his greatest enemy",
 						muted: 'Krishna',
-						image: 'static/images/gita-110.jpg',
+						image: {
+						
+							src: 'static/images/gita-110.jpg',
+							w: 600,
+							h: 395,
+						
+						},
 
 					},
 					
@@ -192,7 +262,13 @@
 						heading: "Lust, anger, and greed..",
 						content: " are three gates to this self-destructive hell. Pleasures of the senses give birth to misery.",
 						muted: 'Krishna',
-						image: 'static/images/gita-112.jpg',
+						image: {
+							
+							src: 'static/images/gita-112.jpg',
+							w: 600,
+							h: 807,
+						
+						},
 
 					},
 					
@@ -201,7 +277,13 @@
 						heading: "Even if you were the most sinful...",
 						content: "of sinners you could cross beyond all sin by the raft of spiritual wisdom.",
 						muted: 'Krishna',
-						image: 'static/images/gita-136.jpg',
+						image: {
+							
+							src: 'static/images/gita-136.jpg',
+							w: 600,
+							h: 812,
+						
+						},
 
 					},
 					
@@ -211,7 +293,13 @@
 						heading: "We are kept from our goal..",
 						content: "not by obstacles, but by a clear path to a lesser goal.",
 						muted: 'Krishna',
-						image: 'static/images/gita-126.jpg',
+						image: {
+						
+							src: 'static/images/gita-126.jpg',
+							w: 600,
+							h: 798,
+						
+						},
 
 					},
 					
@@ -221,7 +309,13 @@
 						heading: "Strive to still your thoughts..",
 						content: "The mind is restless and difficult to restrain, but it is subdued by practice.",
 						muted: 'Krishna',
-						image: 'static/images/003-Sri_Sri_Krishna_Balaram.jpg',
+						image: {
+						
+							src: 'static/images/003-Sri_Sri_Krishna_Balaram.jpg',
+							w: 800,
+							h: 600,
+						
+						}
 
 					},
 					
@@ -230,7 +324,13 @@
 						heading: "One has to learn tolerance ..",
 						content: "in the face of dualities such as happiness and distress, or cold and warmth to become free from anxieties regarding gain and loss",
 						muted: 'Krishna',
-						image: 'static/images/gita-119.jpg',
+						image: {
+						
+							src: 'static/images/gita-119.jpg',
+							w: 600,
+							h: 403,
+						
+						}
 
 					},
 					
@@ -239,7 +339,14 @@
 						heading: "You have the right to work, but..",
 						content: "never to the fruit of work. You should never engage in action for the sake of reward.",
 						muted: 'Krishna',
-						image: 'static/images/maxresdefault.jpg',
+						image: {
+						
+						
+							src: 'static/images/maxresdefault.jpg',
+							w: 1028,
+							h: 874,
+						
+						},
 
 					},
 					
@@ -249,7 +356,13 @@
 						heading: "Do your Dharma and leave..",
 						content: "the results to Krishna. Unwise are constantly anxious about the results of what they do.",
 						muted: 'Krishna',
-						image: 'static/images/Krishna Childhhod.jpg',
+						image: {
+						
+							src: 'static/images/Krishna Childhhod.jpg',
+							w: 490,
+							h: 390,
+						
+						},
 
 					},
 					
@@ -293,6 +406,8 @@
 					this.sliderContent.push(item);
 					this.flag = true;
 				}
+				
+				EventBus.$emit("add-to-gallary", item.image);
 				
 				return item;			  
 			},
@@ -470,7 +585,7 @@
 				
 				this.slideIndex++;
 
-				var items = $('<div class="sl-slide"  data-orientation="'+ (that.slideIndex%2==0? "horizontal": "vertical") +'" data-slice1-rotation="'+that.getRandomInteger()+'" data-slice2-rotation="'+that.getRandomInteger()+'" data-slice1-scale="'+that.getRandomInteger(2)+'" data-slice2-scale="'+that.getRandomInteger(2)+'" ><div class="sl-slide-inner"><div class="deco"><div class="circle"><img class="img-'+that.slideIndex+' content-image br" src="'+obj.image+'"  /></div></div><h2>'+obj.heading+'</h2><blockquote><p>'+obj.content+'</p><cite>'+obj.muted+'</cite></blockquote></div></div>');
+				var items = $('<div class="sl-slide"  data-orientation="'+ (that.slideIndex%2==0? "horizontal": "vertical") +'" data-slice1-rotation="'+that.getRandomInteger()+'" data-slice2-rotation="'+that.getRandomInteger()+'" data-slice1-scale="'+that.getRandomInteger(2)+'" data-slice2-scale="'+that.getRandomInteger(2)+'" ><div class="sl-slide-inner"><div class="deco"><div class="circle"><img class="img-'+that.slideIndex+' content-image br" src="'+obj.image.src+'"  /></div></div><h2>'+obj.heading+'</h2><blockquote><p>'+obj.content+'</p><cite>'+obj.muted+'</cite></blockquote></div></div>');
 				
 				this.slitslider.add(items);
 							
@@ -484,6 +599,12 @@
 				var obj = this.getNewSlideContent();
 									
 				this.addNewSlide(obj);
+			
+			},
+			
+			initGallary(){
+			
+				alert("d");
 			
 			},
 			
