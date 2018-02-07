@@ -59,7 +59,7 @@
 	import EventBus from '../../event-bus';
 	import { PageLoader } from '../../page_loader/components';
 	import { Gallary } from '../../gallary/components';
-
+	import { Sidebar } from '../../sidebar/components';
 
 
 	const slider =  {
@@ -70,6 +70,7 @@
 		
 			"page_loader": PageLoader,
 			Gallary,
+			Sidebar,
 		
 		},
 		
@@ -96,7 +97,7 @@
 			
 				var index_= $(".content-image").index(this);
 			
-				EventBus.$emit("jump-to-gallary-item", index_);
+				EventBus.$emit("jump-to-gallary-item", {images: that.getImagesForGallary(), index: index_});
 			
 			})
 			
@@ -112,6 +113,7 @@
 				slideIndex: 1,
 				firstSlideContent: false,
 				showSlider: false,
+				sliderRealContent: [],
 				
 				content: [
 				
@@ -393,6 +395,24 @@
 				this.copy = this.content.slice();
 			},
 			
+			getImagesForGallary(){
+				
+				var img_arr = [];
+			
+				if(this.sliderRealContent){
+				
+					for(var n in this.sliderRealContent){
+					
+						img_arr.push(this.sliderRealContent[n].image);
+					
+					}
+				
+				}
+				
+				
+				return img_arr;
+			},
+			
 			getNewSlideContent() {
 								  
 				if (this.copy.length < 1) { 
@@ -407,7 +427,8 @@
 					this.flag = true;
 				}
 				
-				EventBus.$emit("add-to-gallary", item.image);
+				
+				this.sliderRealContent.push(item);
 				
 				return item;			  
 			},

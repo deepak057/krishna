@@ -86,17 +86,12 @@
 		mounted(){
 			
 			var that = this;
-		
-			EventBus.$on("add-to-gallary", function(data_){
-			
-				that.addItem(data_);
-			
-			});
-			
-			
-			EventBus.$on("jump-to-gallary-item", function(index_){
-			
-				that.initGallary(index_);
+					
+			EventBus.$on("jump-to-gallary-item", function(images){
+				
+				that.items = images.images;
+							
+				that.initGallary(images.index);
 			
 			});
 			
@@ -136,14 +131,6 @@
 				return gallary;
 										
 			},
-			
-			
-			addItem(item){
-
-				this.items.push(item);
-				
-			},
-			
 		
 		},
 		

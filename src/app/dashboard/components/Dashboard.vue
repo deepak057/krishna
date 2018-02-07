@@ -3,6 +3,7 @@
 	<div>
 		<page_loader v-show="!pageLoaded"></page_loader>
 		<div v-if="pageLoaded">	
+			<img src="static/images/info.png" class="info-icon" title="Help, about, more info etc"/>
 			<chant_button></chant_button>		
 			<slider></slider>
 			<chants></chants>
@@ -19,8 +20,6 @@
 	import { Chants } from '../../chants/components';
 	import { ChantButton } from '../../chant_button/components';
 	import { PageLoader } from '../../page_loader/components';
-
-
 	
 	export default {
 	
