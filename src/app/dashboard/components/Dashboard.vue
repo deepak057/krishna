@@ -3,8 +3,7 @@
 	<div>
 		<page_loader v-show="!pageLoaded"></page_loader>
 		<div v-if="pageLoaded">	
-			<img src="static/images/info.png" class="info-icon" title="Help, about, more info etc"/>
-			<chant_button></chant_button>		
+			<navigation></navigation>		
 			<slider></slider>
 			<chants></chants>
 		</div>
@@ -18,15 +17,16 @@
 	import EventBus from '../../event-bus';
 	import { Slider } from '../../slider/components';
 	import { Chants } from '../../chants/components';
-	import { ChantButton } from '../../chant_button/components';
 	import { PageLoader } from '../../page_loader/components';
+	import { Navigation } from '../../navigation/components';
+
 	
 	export default {
 	
 		components: {
 			Slider,
+			Navigation,
 			Chants,
-			"chant_button": ChantButton,
 			"page_loader": PageLoader,
 		},
 		
